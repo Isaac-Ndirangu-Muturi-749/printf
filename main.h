@@ -10,6 +10,5 @@ int print_char(va_list args);
 int print_string(va_list args);
 int print_int(va_list args);
 int parse_format(const char *format, va_list args);
-int power_of_10(int n);
 
 #endif /* MAIN_H */
