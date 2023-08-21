@@ -11,6 +11,10 @@ int print_int(va_list args)
 	int num = va_arg(args, int);
 	int num_copy = num;
 	int digit_count = (num == 0) ? 1 : 0;
+	int count;
+	int i;
+
+	char digits[10];
 
 	if (num < 0)
 	{
@@ -24,10 +28,9 @@ int print_int(va_list args)
 		digit_count++;
 	}
 
-	int count = digit_count;
-	char digits[digit_count];
+	count = digit_count;
 
-	for (int i = digit_count - 1; i >= 0; i--)
+	for (i = digit_count - 1; i >= 0; i--)
 	{
 		int digit = num % 10;
 
