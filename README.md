@@ -1,8 +1,7 @@
 # PRINTF PROJECT - ALX SOFTWARE ENGINEERING
 
->> PAIR PROJECT
+>> By:
 1. ISAAC MUTURI
-2. LEON KABUE
 
 0x11. C - printf
 
@@ -283,3 +282,13 @@ alex@ubuntu:~/c/printf$
 >> 15. *
 
 - All the above options work well together.
+
+Follow me on Twitter 🐦, connect with me on LinkedIn 🔗, and check out my GitHub 🐙. You won't be disappointed!
+
+👉 Twitter: https://twitter.com/NdiranguMuturi1?t=xXF2OKsqOUeb5J_4yysFKg&s=09
+👉 LinkedIn: https://www.linkedin.com/in/isaac-muturi-3b6b2b237
+👉 GitHub: https://github.com/Isaac-Ndirangu-Muturi-749
+👉 Instagram:
+https://instagram.com/isaacndirangumuturi?igshid=MzNlNGNkZWQ4Mg==
+
+So, what are you waiting for? Join me on my tech journey and learn something new today! 🚀🌟
