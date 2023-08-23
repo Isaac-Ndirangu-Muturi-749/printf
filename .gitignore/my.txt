@@ -1,0 +1,135 @@
+#include "main.h"
+
+int _printf(const char *format, ...)
+{
+    va_list args;
+    int count = 0;
+
+    va_start(args, format);
+    count = parse_format(format, args);
+    va_end(args);
+
+    return count;
+}
+
+int parse_format(const char *format, va_list args)
+{
+    int count = 0;
+    int i = 0;
+
+    while (format && format[i])
+    {
+        if (format[i] == '%')
+        {
+            i++;
+            int specifier_found = 0;
+
+            for (int j = 0; m[j].specifier; j++)
+            {
+                if (format[i] == *(m[j].specifier))
+                {
+                    count += m[j].conversion_function(args);
+                    specifier_found = 1;
+                    break;
+                }
+            }
+
+            if (!specifier_found)
+            {
+                write(1, &format[i - 1], 2);
+                count += 2;
+            }
+        }
+        else
+        {
+            write(1, &format[i], 1);
+            count++;
+        }
+        i++;
+    }
+
+    return count;
+}
+
+int print_char(va_list args)
+{
+    char c = va_arg(args, int);
+    write(1, &c, 1);
+    return 1;
+}
+
+int print_int(va_list args)
+{
+    int num = va_arg(args, int);
+    int num_copy = num;
+    int digit_count = (num == 0) ? 1 : 0;
+    int count;
+    int i;
+
+    char digits[10];
+
+    if (num < 0)
+    {
+        write(1, "-", 1);
+        num = -num;
+    }
+
+    while (num_copy != 0)
+    {
+        num_copy /= 10;
+        digit_count++;
+    }
+
+    count = digit_count;
+
+    for (i = digit_count - 1; i >= 0; i--)
+    {
+        int digit = num % 10;
+        digits[i] = digit + '0';
+        num /= 10;
+    }
+
+    write(1, digits, digit_count);
+    return count;
+}
+
+int print_string(va_list args)
+{
+    char *s = va_arg(args, char *);
+
+    if (s)
+    {
+        int count = 0;
+        while (*s)
+        {
+            write(1, s, 1);
+            s++;
+            count++;
+        }
+        return count;
+    }
+    return 0;
+}
+
+int main(void)
+{
+    int len;
+    int len2;
+    unsigned int ui;
+    void *addr;
+
+    len = _printf("Let's try to printf a simple sentence.\n");
+    len2 = printf("Let's try to printf a simple sentence.\n");
+    ui = (unsigned int)INT_MAX + 1024;
+    addr = (void *)0x7ffe637541f0;
+
+    _printf("Length:[%d, %i]\n", len, len);
+    printf("Length:[%d, %i]\n", len2, len2);
+    
+    _printf("Negative:[%d]\n", -762534);
+    printf("Negative:[%d]\n", -762534);
+
+    // ... other test cases ...
+
+    return 0;
+}
