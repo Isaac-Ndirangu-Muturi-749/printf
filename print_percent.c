@@ -1,15 +1,14 @@
 #include "main.h"
 
 /**
- * print_percent - Print a literal '%' character.
- * @args: The va_list of arguments (not used in this function).
+ * print_percent - Print a percent character.
+ * @args: The va_list of arguments.
  *
- * Return: Always returns 1 (the number of characters printed).
+ * Return: Always return 1 (number of characters printed).
  */
 int print_percent(va_list args)
 {
-	(void)args; /*Unused parameter*/
-
+	(void)args;
 	write(1, "%", 1);
 	return (1);
 }
