@@ -1,49 +1,50 @@
 #include "main.h"
 
 /**
- * parse_format - Parses the format string and processes conversion specifiers.
- * @format: The format string containing conversion specifiers.
- * @args: The variable arguments to be formatted and printed.
+ * parse_format - Parse and print the formatted string.
+ * @format: The format string containing the conversion specifiers.
+ * @args: The va_list of arguments.
+ * @m: The array of conversion specifiers and their corresponding functions.
  *
  * Return: The number of characters printed.
  */
-int parse_format(const char *format, va_list args)
+int parse_format(const char *format, va_list args, struct convert_match *m)
 {
 	int count = 0;
+	int i = 0;
+	int specifier_found;
+	int j;
 
-	while (*format)
+	while (format && format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			switch (*format)
+			i++;
+			specifier_found = 0;
+
+			/* Find specifier match*/
+			for (j = 0; m[j].specifier; j++)
 			{
-			case 'c':
-				count += print_char(args);
-				break;
-			case 's':
-				count += print_string(args);
-				break;
-			case 'd':
-			case 'i':
-				count += print_int(args);
-				break;
-			case '%':
-				write(1, "%", 1);
-				count++;
-				break;
-			default:
-				write(1, format - 1, 2);
+				if (format[i] == *(m[j].specifier))
+				{
+					count += m[j].conversion_function(args);
+					specifier_found = 1;
+					break;
+				}
+			}
+
+			if (!specifier_found)
+			{
+				write(1, &format[i - 1], 2);
 				count += 2;
-				break;
 			}
 		}
 		else
 		{
-			write(1, format, 1);
+			write(1, &format[i], 1);
 			count++;
 		}
-		format++;
+		i++;
 	}
 
 	return (count);
