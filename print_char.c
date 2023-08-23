@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * print_char - Prints a character to standard output.
- * @args: The va_list containing the character to be printed.
+ * print_char - Print a character.
+ * @args: The va_list of arguments.
  *
- * Return: The number of characters printed (always 1).
+ * Return: Always return 1 (number of characters printed).
  */
 int print_char(va_list args)
 {
