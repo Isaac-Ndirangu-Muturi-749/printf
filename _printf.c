@@ -17,7 +17,6 @@ int _printf(const char *format, ...)
 		{"%s", print_string},
 		{"%c", print_char},
 		{"%%", print_percent},
-		{"%i", print_int},
 		/* ... other specifier-function pairs ...*/
 		{NULL, NULL} /* End of the array */
 	};
