@@ -1,43 +1,51 @@
 #include "main.h"
 
 /**
- * print_int - Prints an integer to standard output.
- * @args: The va_list containing the integer to be printed.
+ * print_int - Print an integer.
+ * @args: The va_list of arguments.
  *
  * Return: The number of characters printed.
  */
 int print_int(va_list args)
 {
-	int num = va_arg(args, int);
-	int num_copy = num;
-	int digit_count = (num == 0) ? 1 : 0;
-	int count;
-	int i;
+	int n = va_arg(args, int);
+	int count = 0;
+	int is_negative = 0;
 
-	char digits[10];
-
-	if (num < 0)
+	if (n < 0)
 	{
+		is_negative = 1;
+		n = -n;
 		write(1, "-", 1);
-		num = -num;
+		count++;
 	}
 
-	while (num_copy != 0)
+	if (n == 0)
 	{
-		num_copy /= 10;
-		digit_count++;
+		write(1, "0", 1);
+		count++;
 	}
-
-	count = digit_count;
-
-	for (i = digit_count - 1; i >= 0; i--)
+	else
 	{
-		int digit = num % 10;
+		int reversed = 0;
+		int num_digits = 0;
 
-		digits[i] = digit + '0';
-		num /= 10;
+		while (n > 0)
+		{
+			reversed = reversed * 10 + (n % 10);
+			n /= 10;
+			num_digits++;
+		}
+
+		while (reversed > 0)
+		{
+			char digit = '0' + (reversed % 10);
+
+			write(1, &digit, 1);
+			reversed /= 10;
+			count++;
+		}
 	}
 
-	write(1, digits, digit_count);
-	return (count);
+	return (count + is_negative);
 }
